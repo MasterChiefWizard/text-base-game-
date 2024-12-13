@@ -1,6 +1,8 @@
 #include<iostream>
 #include<CoreWindow.h>
 #include<chrono>
+#include <Windows.h>
+#pragma comment (lib, "winmm.lib")
 using namespace std;
 
 string items[5];
@@ -46,6 +48,7 @@ int main() {
 				cout << "I find some iron sword on the second floor." << endl;
 			break;
 		case 2:
+			battlesys();
 			cout << "you are in room 2, you can go (e)ast or (s)outh or (w)est." << endl;
 			cin >> choice;
 			if (choice == "e")
@@ -80,6 +83,7 @@ int main() {
 				cout << "this place is so quie it, I wish I could see my freinds in this dungeon ." << endl;
 			break;
 		case 6:
+			battlesys();
 			cout << "you are in room 6, you can go (e)ast. " << endl;
 			cin >> choice;
 			if (choice == "e")
@@ -89,7 +93,7 @@ int main() {
 				cout << "you grab a magic book !" << endl;
 			}
 			else
-				cout << "I find some magic book when I defeated that bosses  ." << endl;
+				cout << "I find some magic book when I defeated that bosses  ." << endl;
 			break;
 		case 7:
 			cout << "you are in room 7, you can go (e)ast. " << endl;
@@ -128,6 +132,7 @@ int main() {
 				cout << "I felt like this is not going to be easy but I feel like it going to be a nighmare. ." << endl;
 			break;
 		case 10:
+			BossBattle();
 			if (playerhealth >= 250) {
 				cout << "winning story " << endl;
 			}
@@ -232,7 +237,7 @@ void numberPuzzle() {
 	int timeleft = 60;
 	system("color 2b");
 	cout << "-------------------------------------------------------------------------" << endl;
-	cout << "a troll bocks the door...  it says: guess a number between 1-20!" << endl;
+	cout << "a troll bocks the door...  it says: guess a number between 1-20!" << endl;
 	while (guess != num && timeleft > 0) {
 		auto now = chrono::steady_clock::now();
 		timeleft = limit - chrono::duration_cast <chrono::seconds> (now - start).count();
@@ -251,10 +256,11 @@ void numberPuzzle() {
 }
 
 void BossBattle() {
-	int bosseshp;
+	
 	system("color 04");
 	PlaySound(TEXT("FinalMO.WAV"), NULL, SND_LOOP | SND_ASYNC);
 	//int MoHealth = 400;
+	int bosseshp = 1000;
 	int bossesDMG = 0;
 	int PlayerDMG = 0;
 
@@ -289,3 +295,4 @@ void BossBattle() {
 
 
 	}
+}
