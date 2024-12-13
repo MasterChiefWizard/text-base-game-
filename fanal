@@ -1,0 +1,291 @@
+#include<iostream>
+#include<CoreWindow.h>
+#include<chrono>
+using namespace std;
+
+string items[5];
+
+int playerhealth = 100;
+
+void battlesys();
+
+void numberPuzzle();
+
+void BossBattle();
+
+int main() {
+	srand(time(NULL));
+	numberPuzzle();
+
+	string choice;
+	int room = 1;
+
+
+	cout << "welcome to the hardest dungeon bosses in the would" << endl;
+	while (true) {
+
+		cout << "your inventory:";
+		for (int i = 0; i < 5; i++)
+			cout << items[i] << " ";
+		cout << endl << endl;
+
+
+
+		switch (room) {
+		case 1:
+			cout << "you are in room 1, you can go (e)ast. " << endl;
+			cin >> choice;
+			if (choice == "e")
+				room = 2;
+			if (items[0] != "storngest sword") {
+				items[0] = "storngest sword";
+				cout << "you grab a storngest sword!" << endl;
+				playerhealth += 50;
+			}
+			else
+				cout << "I find some iron sword on the second floor." << endl;
+			break;
+		case 2:
+			cout << "you are in room 2, you can go (e)ast or (s)outh or (w)est." << endl;
+			cin >> choice;
+			if (choice == "e")
+				room = 3;
+			else if (choice == "s")
+				room = 4;
+			else if (choice == "w")
+				room = 1;
+			if (items[1] != " the key ") {
+				items[1] = " the key";
+				cout << "you grab a key fo a final boss!" << endl;
+			}
+		case 4:
+			cout << "you are in room 4, you can go (s)outh. " << endl;
+			cin >> choice;
+			if (choice == "s")
+				room = 5;
+			if (items[2] != "storngest armor") {
+				items[2] = "storngest armor";
+				cout << "you grab a storngest armor in the would!" << endl;
+				playerhealth += 100;
+			}
+			else
+				cout << "I find some the storngest armor on the fouth floor." << endl;
+			break;
+		case 5:
+			cout << "you are in room 5, you can go (s)outh. " << endl;
+			cin >> choice;
+			if (choice == "s")
+				room = 6;
+			else
+				cout << "this place is so quie it, I wish I could see my freinds in this dungeon ." << endl;
+			break;
+		case 6:
+			cout << "you are in room 6, you can go (e)ast. " << endl;
+			cin >> choice;
+			if (choice == "e")
+				room = 7;
+			if (items[3] != "magic book") {
+				items[3] = "magic book";
+				cout << "you grab a magic book !" << endl;
+			}
+			else
+				cout << "I find some magic book when I defeated that bosses  ." << endl;
+			break;
+		case 7:
+			cout << "you are in room 7, you can go (e)ast. " << endl;
+			cin >> choice;
+			if (choice == "e")
+				room = 8;
+			if (items[4] != "food for healing") {
+				items[4] = "food for healing";
+				cout << "you grab a food for healing!" << endl;
+			}
+			else
+				cout << "I final have food to heals myself,alright then I'm almost here but I don't know which way I should go." << endl;
+			break;
+		case 8:
+			cout << "you are in room 8 , you can go (e)ast or (s)outh. " << endl;
+			cin >> choice;
+			if (choice == "e")
+				room = 9;
+			else if (choice == "s")
+				room = 11;
+			else
+				cout << "okay then I ready for this final fight because I need to get out of here so I could get my own money and move on " << endl;
+			break;
+		case 9:
+			cout << "you are in room 9, you can go (e)ast. " << endl;
+			cin >> choice;
+			if (choice == "e") {
+				//put an if statement checking if you have a key in the right slot{
+				if (items[1] == " key ") {
+					cout << " " << endl;
+					room = 10;
+				}
+				else cout << " " << endl;
+			}
+			else
+				cout << "I felt like this is not going to be easy but I feel like it going to be a nighmare. ." << endl;
+			break;
+		case 10:
+			if (playerhealth >= 250) {
+				cout << "winning story " << endl;
+			}
+			else {
+				cout << "losting story " << endl;
+
+				break;
+			}
+
+
+
+
+		}//end of switch
+
+
+
+	} //end of loop
+}//end of main
+
+
+
+
+
+void battlesys() {
+
+	int monsterhealth = 20;
+	int input;
+	int num;
+	cout << endl << endl << "-----------------BATTLE TIME!-------------------" << endl;
+	while (playerhealth > 0 && monsterhealth > 0) {
+
+		if (items[1] == "armor") {
+			num = rand() % 7 + 3;
+			cout << "you armor absorbs the blow and you get hit for " << num << "damage!" << endl;
+			playerhealth -= num;
+		}
+		else {
+			num = rand() % 15 + 12;
+			cout << "you punch the monster for" << num << "dmg" << endl;
+			monsterhealth -= num;
+
+
+		}
+
+		cout << "monster bites you for 25 dmg" << endl;
+		playerhealth -= 25;
+
+
+		cout << "prees 1 to attack, 2 to drink potion, 3 to try to escape!" << endl;
+		cin >> input;
+
+		switch (input) {
+		case 1:
+			if (items[0] == "storngest sword") {
+				num = rand() % 10 + 10;
+				cout << "you slash the monster with your storngest sword for" << num << "damage!" << endl;
+				monsterhealth -= num;
+
+			}
+			else {
+				num = rand() % 15 + 12;
+				cout << "you punch the monster for" << num << "dmg" << endl;
+				monsterhealth -= num;
+
+
+			}
+			cout << "you hit the monster for 10 dmg" << endl;
+			monsterhealth -= 10;
+			break;
+		case 2:
+			if (items[3] == "potion") {
+				cout << "glug glug!" << endl;
+				playerhealth += 50;
+				items[3] = " ";
+
+				cout << "sorry, you don't have any potions." << endl;
+
+				break;
+			}
+		case 3:
+			num = rand() % 100;
+			if (num > 75)
+				cout << "you successfully run away" << endl;
+
+			break;
+
+		default:
+			cout << " sorry not an option." << endl;
+			cout << " your health:" << playerhealth << endl;
+			cout << "monster's health:" << monsterhealth << endl;
+		}
+	}
+	cout << "end of battle-----------------------------------------" << endl;
+}
+
+void numberPuzzle() {
+	int limit = 60;
+
+	auto start = chrono::steady_clock::now();
+	int num = rand() % 20 + 1;
+	int guess = -1;
+	int timeleft = 60;
+	system("color 2b");
+	cout << "-------------------------------------------------------------------------" << endl;
+	cout << "a troll bocks the door...  it says: guess a number between 1-20!" << endl;
+	while (guess != num && timeleft > 0) {
+		auto now = chrono::steady_clock::now();
+		timeleft = limit - chrono::duration_cast <chrono::seconds> (now - start).count();
+		cin >> guess;
+		if (guess != num) {
+			cout << "wrong answer!" << endl;
+			cout << "time left" << timeleft << endl;
+		}
+		else cout << " you got it" << endl;
+	}
+
+
+
+
+
+}
+
+void BossBattle() {
+	int bosseshp;
+	system("color 04");
+	PlaySound(TEXT("FinalMO.WAV"), NULL, SND_LOOP | SND_ASYNC);
+	//int MoHealth = 400;
+	int bossesDMG = 0;
+	int PlayerDMG = 0;
+
+	while (bosseshp > 0 && playerhealth > 0) {
+		if (items[2] == "armor") {
+			bossesDMG = rand() % 25 + 15;
+			cout << "MO hits you with OTTER SWARM, but your armor took a lot of damage. You only took " << bossesDMG << " damage" << endl;
+			playerhealth -= bossesDMG;
+
+		}
+		else {
+			bossesDMG = rand() % 150 + 100;
+			cout << "MO hits you with TEARS OF STUDENTS, it does " << bossesDMG << " HP" << endl;
+			playerhealth -= bossesDMG;
+			PlayerDMG = rand() % 76; //Your attack is between 0 and 75
+		}
+		if (items[4] == "Sword Of Prophicy") {
+			PlayerDMG = rand() % 100 + 50;
+		}
+		else {
+			PlayerDMG = rand() % 100;
+		}
+		//if (inventory[5] == "potion ")
+		cout << "You counter the monster for " << PlayerDMG << " HP" << endl << endl;
+		bosseshp -= PlayerDMG;
+		system("pause");
+		cout << "Your health is now: " << playerhealth << endl;
+		cout << "The monsters health is now: " << bosseshp << endl;
+		system("pause");
+
+
+
+
+	}
